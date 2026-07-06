@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#0f6b4f">
+    <meta name="description" content="Тренажер запоминания порядка карт с офлайн-режимом.">
+    <title>Memory Card Trainer</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="Memory Card Trainer">
+          <img class="brand-mark" src="icons/icon.svg" width="42" height="42" alt="">
+          <span class="brand-text">Memory Card Trainer</span>
+        </a>
+        <div class="topbar-actions">
+          <span class="status-pill" id="offlineStatus">Офлайн готов</span>
+          <button class="ghost-button" id="installButton" type="button" hidden>Установить</button>
+        </div>
+      </header>
+
+      <main class="app">
+        <section class="stats-grid" aria-label="Статистика">
+          <div class="stat">
+            <span>Раунды</span>
+            <strong id="roundsCount">0</strong>
+          </div>
+          <div class="stat">
+            <span>Лучший</span>
+            <strong id="bestScore">0%</strong>
+          </div>
+          <div class="stat">
+            <span>Средний</span>
+            <strong id="averageScore">0%</strong>
+          </div>
+          <div class="stat">
+            <span>Серия</span>
+            <strong id="perfectStreak">0</strong>
+          </div>
+        </section>
+
+        <section class="control-band" aria-label="Настройки">
+          <div class="field mode-field">
+            <label for="modeControls">Режим</label>
+            <div class="segmented mode-grid" id="modeControls" role="group" aria-label="Режим обучения">
+              <button type="button" data-mode="1-13">1-13</button>
+              <button type="button" data-mode="14-26">14-26</button>
+              <button type="button" data-mode="1-26">1-26</button>
+              <button type="button" data-mode="27-39">27-39</button>
+              <button type="button" data-mode="1-39">1-39</button>
+              <button type="button" data-mode="40-52">40-52</button>
+              <button type="button" data-mode="1-52">1-52</button>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="studyTimeValue">Показ</label>
+            <div class="stepper">
+              <button class="icon-button" id="timeMinusBtn" type="button" aria-label="Уменьшить время">−</button>
+              <output id="studyTimeValue" for="timeMinusBtn timePlusBtn">60 c</output>
+              <button class="icon-button" id="timePlusBtn" type="button" aria-label="Увеличить время">+</button>
+            </div>
+          </div>
+
+          <button class="primary-button" id="newRoundBtn" type="button">Новая тренировка</button>
+        </section>
+
+        <section class="stage is-active" id="studyPanel" aria-labelledby="studyTitle">
+          <div class="stage-head">
+            <div>
+              <p class="eyebrow">Запоминание</p>
+              <h1 id="studyTitle">№ <span id="studyNumber">1</span> · карта <span id="studyPosition">1</span> из <span id="studyTotal">13</span></h1>
+            </div>
+            <div class="timer" aria-live="polite">
+              <span id="timerValue">01:00</span>
+              <div class="meter" aria-hidden="true"><span id="timerMeter"></span></div>
+            </div>
+          </div>
+
+          <div class="study-layout">
+            <div class="card-stage">
+              <button class="nav-button" id="prevCardBtn" type="button" aria-label="Предыдущая карта">‹</button>
+              <div class="main-card-wrap" id="studyCard"></div>
+              <button class="nav-button" id="nextCardBtn" type="button" aria-label="Следующая карта">›</button>
+            </div>
+
+            <aside class="round-panel" aria-label="Карты раунда">
+              <div class="mini-strip" id="studyStrip"></div>
+              <button class="primary-button wide" id="startRecallBtn" type="button">Перейти к проверке</button>
+            </aside>
+          </div>
+        </section>
+
+        <section class="stage" id="recallPanel" aria-labelledby="recallTitle">
+          <div class="stage-head">
+            <div>
+              <p class="eyebrow">Восстановление</p>
+              <h1 id="recallTitle"><span id="recallProgress">0</span> / <span id="recallTotal">13</span></h1>
+            </div>
+            <div class="action-row compact">
+              <button class="ghost-button" id="undoRecallBtn" type="button">Отменить</button>
+              <button class="ghost-button" id="clearRecallBtn" type="button">Сбросить</button>
+              <button class="primary-button" id="checkRecallBtn" type="button">Проверить</button>
+            </div>
+          </div>
+
+          <div class="recall-layout">
+            <section class="answer-track" id="answerTrack" aria-label="Ответ"></section>
+            <section class="card-pool" id="cardPool" aria-label="Карты"></section>
+          </div>
+        </section>
+
+        <section class="stage" id="reviewPanel" aria-labelledby="reviewTitle">
+          <div class="stage-head">
+            <div>
+              <p class="eyebrow">Разбор</p>
+              <h1 id="reviewTitle"><span id="reviewScore">0</span> из <span id="reviewTotal">13</span></h1>
+            </div>
+            <strong class="score-badge" id="reviewPercent">0%</strong>
+          </div>
+
+          <div class="review-actions">
+            <button class="ghost-button" id="repeatRoundBtn" type="button">Повторить</button>
+            <button class="primary-button" id="newFromReviewBtn" type="button">Новая колода</button>
+          </div>
+
+          <section class="review-list" id="reviewList" aria-label="Разбор ответов"></section>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>

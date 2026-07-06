@@ -1,0 +1,10 @@
+<svg width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Memory Card Trainer" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="96" fill="#0f6b4f"/>
+  <path d="M156 116h174c29 0 52 23 52 52v228H208c-29 0-52-23-52-52V116Z" fill="#d99b1b"/>
+  <rect x="116" y="94" width="236" height="326" rx="36" fill="#ffffff"/>
+  <rect x="146" y="124" width="176" height="266" rx="22" fill="#f6f8f4" stroke="#d8e0d7" stroke-width="6"/>
+  <path d="M234 172c24 38 68 62 68 112 0 42-30 72-68 72s-68-30-68-72c0-50 44-74 68-112Z" fill="#ba3444"/>
+  <path d="M219 344h30l10 34h-50l10-34Z" fill="#17211d"/>
+  <circle cx="174" cy="170" r="16" fill="#0f6b4f"/>
+  <circle cx="294" cy="344" r="16" fill="#2d68b1"/>
+</svg>
