@@ -420,6 +420,8 @@ button:not(:disabled):active {
   max-height: 420px;
   overflow: auto;
   padding: 2px;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
 }
 
 .recall-layout {
@@ -732,8 +734,20 @@ button:not(:disabled):active {
   }
 
   .mini-strip {
-    grid-template-columns: repeat(auto-fill, minmax(42px, 1fr));
-    max-height: 152px;
+    grid-auto-columns: 48px;
+    grid-auto-flow: column;
+    grid-template-columns: none;
+    min-height: 72px;
+    max-height: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 2px 2px 8px;
+    scroll-padding-inline: 8px;
+    scroll-snap-type: x proximity;
+  }
+
+  .mini-strip .playing-card {
+    scroll-snap-align: center;
   }
 }
 

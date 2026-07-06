@@ -516,12 +516,24 @@ function renderStudy() {
   replaceChildren(els.studyCard, createCardElement(currentCardId, "large"));
 
   els.studyStrip.textContent = "";
+  let activeStripCard = null;
   round.deck.forEach((cardId, index) => {
     const card = createCardElement(cardId, "tiny");
-    card.classList.toggle("is-correct", index === round.studyIndex);
-    card.setAttribute("aria-current", index === round.studyIndex ? "true" : "false");
+    const isActive = index === round.studyIndex;
+    card.classList.toggle("is-correct", isActive);
+    card.setAttribute("aria-current", isActive ? "true" : "false");
     els.studyStrip.append(card);
+
+    if (isActive) {
+      activeStripCard = card;
+    }
   });
+
+  if (activeStripCard) {
+    requestAnimationFrame(() => {
+      activeStripCard.scrollIntoView({ block: "nearest", inline: "center" });
+    });
+  }
 
   updateTimer();
 }
