@@ -378,14 +378,33 @@ button:not(:disabled):active {
 .card-stage {
   display: grid;
   grid-template-columns: 52px minmax(0, 1fr) 52px;
+  grid-template-rows: auto minmax(0, 1fr);
   align-items: center;
+  row-gap: 10px;
   min-height: 420px;
+  padding: 14px 8px 16px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background:
     radial-gradient(circle at 20% 18%, rgba(45, 104, 177, 0.12), transparent 32%),
     radial-gradient(circle at 78% 72%, rgba(186, 52, 68, 0.10), transparent 30%),
     var(--surface-soft);
+}
+
+.card-number-badge {
+  grid-column: 1 / -1;
+  justify-self: center;
+  min-width: 84px;
+  padding: 5px 14px 6px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--green-deep);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 8px 18px rgba(23, 33, 29, 0.08);
+  font-size: clamp(24px, 6vw, 38px);
+  font-weight: 950;
+  line-height: 1;
+  text-align: center;
 }
 
 .main-card-wrap {
@@ -727,6 +746,8 @@ button:not(:disabled):active {
 
   .card-stage {
     min-height: clamp(330px, 62dvh, 460px);
+    row-gap: 8px;
+    padding-block: 10px 14px;
   }
 
   .round-panel {
@@ -776,6 +797,11 @@ button:not(:disabled):active {
 
   .card-stage {
     grid-template-columns: 44px minmax(0, 1fr) 44px;
+  }
+
+  .card-number-badge {
+    min-width: 70px;
+    padding: 4px 12px 5px;
   }
 
   .nav-button {
