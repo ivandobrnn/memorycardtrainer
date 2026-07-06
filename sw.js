@@ -1,6 +1,6 @@
 "use strict";
 
-const CACHE_NAME = "memory-card-trainer-v3";
+const CACHE_NAME = "memory-card-trainer-v4";
 const APP_SHELL = [
   "./",
   "./index.html",

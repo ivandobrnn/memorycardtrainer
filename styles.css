@@ -487,6 +487,10 @@ button:not(:disabled):active {
   width: 100%;
 }
 
+.playing-card.compact-card {
+  padding: 5px 3px;
+}
+
 .playing-card.is-selected {
   border-color: var(--green);
   opacity: 0.42;
@@ -563,6 +567,33 @@ button:not(:disabled):active {
 .card-face {
   display: grid;
   justify-items: center;
+}
+
+.compact-face {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 1px;
+  min-width: 0;
+}
+
+.compact-rank {
+  font-size: 22px;
+  font-weight: 950;
+  line-height: 0.9;
+}
+
+.compact-suit {
+  font-size: 24px;
+  line-height: 0.9;
+}
+
+.tiny .compact-rank {
+  font-size: 19px;
+}
+
+.tiny .compact-suit {
+  font-size: 21px;
 }
 
 .answer-slot {

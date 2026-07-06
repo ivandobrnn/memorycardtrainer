@@ -649,6 +649,18 @@ function createCardElement(cardId, size, options = {}) {
   }
 
   node.setAttribute("aria-label", cardLabel(card));
+
+  if (size !== "large") {
+    node.classList.add("compact-card");
+    node.innerHTML = `
+      <span class="compact-face">
+        <span class="compact-rank">${card.rank.label}</span>
+        <span class="compact-suit">${card.suit.symbol}</span>
+      </span>
+    `;
+    return node;
+  }
+
   node.innerHTML = `
     <span class="card-corner"><span>${card.rank.label}</span><span>${card.suit.symbol}</span></span>
     <span class="card-face"><span class="card-rank">${card.rank.label}</span><span class="card-suit">${card.suit.symbol}</span></span>
