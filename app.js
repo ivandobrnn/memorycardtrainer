@@ -152,6 +152,7 @@ if (!state.round) {
 }
 
 bindEvents();
+lockPageZoom();
 registerServiceWorker();
 render();
 setInterval(tick, 400);
@@ -299,6 +300,39 @@ function bindEvents() {
 
   window.addEventListener("online", updateOfflineStatus);
   window.addEventListener("offline", updateOfflineStatus);
+}
+
+function lockPageZoom() {
+  const preventZoom = (event) => {
+    event.preventDefault();
+  };
+
+  document.addEventListener("gesturestart", preventZoom, { passive: false });
+  document.addEventListener("gesturechange", preventZoom, { passive: false });
+  document.addEventListener("gestureend", preventZoom, { passive: false });
+
+  document.addEventListener(
+    "touchmove",
+    (event) => {
+      if (event.touches.length > 1) {
+        event.preventDefault();
+      }
+    },
+    { passive: false },
+  );
+
+  let lastTouchEnd = 0;
+  document.addEventListener(
+    "touchend",
+    (event) => {
+      const now = Date.now();
+      if (now - lastTouchEnd <= 300) {
+        event.preventDefault();
+      }
+      lastTouchEnd = now;
+    },
+    { passive: false },
+  );
 }
 
 function createRound(modeId, studySeconds) {

@@ -23,6 +23,7 @@
 html {
   min-height: 100%;
   background: var(--bg);
+  touch-action: pan-x pan-y;
 }
 
 body {
@@ -32,6 +33,8 @@ body {
   background:
     linear-gradient(180deg, rgba(15, 107, 79, 0.08), transparent 240px),
     var(--bg);
+  overflow-x: hidden;
+  touch-action: pan-x pan-y;
 }
 
 button,
